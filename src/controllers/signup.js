@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const { User } = require('../models');
 
 const signup = async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     try {
         // Validate required fields
@@ -17,7 +17,7 @@ const signup = async (req, res) => {
         };
 
         // Check if email already exists
-        const existingUser = await User.findOne({ where: { email } }).first();
+        const existingUser = await User.findOne({ where: { email } });
         if (existingUser) {
             return res.status(409).json({
                 status: 409,

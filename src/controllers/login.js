@@ -1,4 +1,8 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 const { User } = require('../models');
+
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -15,7 +19,7 @@ const login = async (req, res) => {
 
     try {
         // Check if user exists
-        const user = await User.findOne({ where: { email } }).first();
+        const user = await User.findOne({ where: { email } });
         if (!user) {
             return res.status(404).json({
                 status: 404,
@@ -37,6 +41,9 @@ const login = async (req, res) => {
         }
 
         // Generate JWT
+        if (!process.env.JWT_SECRET) {
+            throw new Error('JWT_SECRET environment variable is not set');
+        }
         const token = jwt.sign({ userId: user.user_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         res.status(200).json({

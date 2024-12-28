@@ -2,44 +2,38 @@ const { Artist } = require('../models');
 
 // GET /artistById Controller
 const getArtistById = async (req, res) => {
-    const { limit = 5, offset = 0, grammy, hidden } = req.query;
     const {id} = req.params;
 
     try {
 
-    // Check if id is provided
-        if (!id) {
-            return res.status(400).json({
-                status: 400,
+        const artist = await Artist.findByPk(id);
+        
+        // Check if artist exists
+        if (!artist) {
+            return res.status(404).json({
+                status: 404,
                 data: null,
-                message: "Bad Request",
+                message: "Artist not found",
                 error: null
             });
         }
 
-        // Only admin and editor can access hidden artists
-        const canViewHidden = ['admin', 'editor'].includes(req.user.role);
-        if (canViewHidden) {
-            hidden = 'false'
+        // Check access for hidden artists
+        if (artist.hidden) {
+            const userRole = req.user?.role; // Assume req.user is populated by auth middleware
+            if (!['Admin', 'Editor'].includes(userRole)) {
+            return res.status(403).json({
+                status: 403,
+                data: null,
+                message: "Forbidden Access. Viewers cannot access hidden artists.",
+                error: null,
+            });
+            }
         }
-
-        // Build filters
-        const filters = {};
-        filters.artist_id = id
-        if (grammy) filters.grammy = grammy;
-        if (hidden) filters.hidden = hidden.toLowerCase() === 'true';
-
-        // Fetch artists with filters and pagination
-        const artists = await Artist.findOne({
-          where: filters,
-          limit: parseInt(limit),
-          offset: parseInt(offset),
-        });
-
         return res.status(200).json({
             status: 200,
-            data: artists,
-            message: "Artists retrieved successfully.",
+            data: artist,
+            message: "Artist retrieved successfully.",
             error: null,
         });
     } catch (error) {
