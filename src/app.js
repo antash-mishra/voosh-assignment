@@ -11,7 +11,7 @@ app.use(express.json());
 // Routes
 app.use('/api/v1', require('./routes/auth'));
 app.use('/api/v1/users', require('./routes/users'));
-// app.use('/api/v1/artists', require('./routes/artists'));
+app.use('/api/v1/artists', require('./routes/artists'));
 // app.use('/api/v1/albums', require('./routes/albums'));
 // app.use('/api/v1/tracks', require('./routes/tracks'));
 // app.use('/api/v1/favorites', require('./routes/favorites'));

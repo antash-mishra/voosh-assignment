@@ -51,7 +51,7 @@ const getUsers = async (req, res) => {
             data: null,
             message: 'Internal Server Error',
             error: error.message
-        });
+        }); 
     }
 
 };
