@@ -10,6 +10,6 @@ router.get('/', authenticate, validateAuthorization,  getAlbums);
 router.get('/:id', authenticate, validateObjectId, validateAuthorization, getAlbumById);
 router.post('/add-album', authenticate, validateAuthorization, addAlbum);
 router.put('/:id', authenticate, validateAuthorization, validateObjectId, updateAlbum);
-router.delete(':/id', authenticate,validateAuthorization, validateObjectId, deleteAlbum);
+router.delete('/:id', authenticate,validateAuthorization, validateObjectId, deleteAlbum);
 
 module.exports = router;

@@ -1,7 +1,8 @@
 const { Track, Album, Artist } = require('../models');
-const track = require('../models/track');
+// const track = require('../models/track');
+const { v4: uuidv4 } = require('uuid');
 
-// POST /add-track - Add new Track
+// POST /tracks/add-track - Add new Track
 const addTrack = async (req, res) => {
     const {artist_id, album_id, name, duration, hidden = false} = req.body;
 
@@ -41,7 +42,7 @@ const addTrack = async (req, res) => {
         }
 
         // Check if Track already exists
-        const existingTrack = await track.fetchOne({where: {name, album_id, artist_id}});
+        const existingTrack = await Track.findOne({where: {name, album_id, artist_id}});
         if (existingTrack) {
             return res.status(409).json({
                 status: 409,
@@ -52,7 +53,7 @@ const addTrack = async (req, res) => {
         }
 
         // Creating new Track
-        await track.create({
+        await Track.create({
             track_id: uuidv4(),
             artist_id,
             album_id,
@@ -80,7 +81,7 @@ const addTrack = async (req, res) => {
 
 // GET /tracks Controller
 const getTracks = async (req, res) => {
-    const { limit = 5, offset = 0, album_id, artist_id, hidden } = req.query;
+    const { limit = 5, offset = 0, album_id, artist_id, name, hidden } = req.query;
 
     try {
         // Validate pagination parameters
@@ -107,7 +108,7 @@ const getTracks = async (req, res) => {
         if (album_id) filters.album_id = album_id;
         if (artist_id) filters.artist_id = artist_id;
         if (hidden) filters.hidden = hidden.toLowerCase() === 'true';
-
+        if (name) filters.name = name;
         // Check user role for visibility
         const userRole = req.user?.role; // Assume `req.user` is populated by auth middleware
         if (userRole === 'Viewer') {

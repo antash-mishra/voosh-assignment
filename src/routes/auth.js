@@ -4,6 +4,7 @@ const { signup } = require('../controllers/signup');
 const { login } = require('../controllers/login');
 const authenticate = require('../middlewares/authenticate');
 const validateAuthorization = require('../middlewares/validateAuthorization');
+const logoutUser = require('../controllers/logoutUser');
 
 // Signup Route
 router.post('/signup', signup);
@@ -12,6 +13,6 @@ router.post('/signup', signup);
 router.post('/login', login);
 
 // Logout Route
-route.get('/logout', authenticate, validateAuthorization, logout);
+router.get('/logout', authenticate, validateAuthorization, logoutUser);
 
 module.exports = router;

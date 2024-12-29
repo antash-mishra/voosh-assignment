@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     name: {type: DataTypes.STRING, allowNull: false},
     year: {type: DataTypes.INTEGER, allowNull: false},
     hidden: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
-    artist_id: {type: DataTypes.UUID, allowNull: false, references: {model: 'Artists', key: 'artist_id'}}
+    artist_id: {type: DataTypes.UUID, allowNull: false}
   }, {
     sequelize,
     modelName: 'Album',
