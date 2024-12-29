@@ -9,6 +9,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get('/', (req, res) => {
+    res.status(200).send('Hello World');
+});
+  
 app.use('/api/v1', require('./routes/auth'));
 app.use('/api/v1/users', require('./routes/users'));
 app.use('/api/v1/artists', require('./routes/artists'));
