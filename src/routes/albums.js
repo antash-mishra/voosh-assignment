@@ -5,11 +5,13 @@ const { getAlbums, getAlbumById, addAlbum, updateAlbum, deleteAlbum } = require(
 const validateAuthorization = require('../middlewares/validateAuthorization');
 const router = express.Router();
 
+router.use(authenticate);
+
 // Album Routes
-router.get('/', authenticate, validateAuthorization,  getAlbums);
-router.get('/:id', authenticate, validateObjectId, validateAuthorization, getAlbumById);
-router.post('/add-album', authenticate, validateAuthorization, addAlbum);
-router.put('/:id', authenticate, validateAuthorization, validateObjectId, updateAlbum);
-router.delete('/:id', authenticate,validateAuthorization, validateObjectId, deleteAlbum);
+router.get('/', validateAuthorization,  getAlbums);
+router.get('/:id', validateObjectId, validateAuthorization, getAlbumById);
+router.post('/add-album', validateAuthorization, addAlbum);
+router.put('/:id', validateAuthorization, validateObjectId, updateAlbum);
+router.delete('/:id',validateAuthorization, validateObjectId, deleteAlbum);
 
 module.exports = router;

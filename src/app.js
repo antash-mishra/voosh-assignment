@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const authenticate = require('./middlewares/authenticate');
 require('dotenv').config();
 
 const app = express();
@@ -13,7 +14,7 @@ app.get('/', (req, res) => {
     res.status(200).send('Hello World');
 });
   
-app.use('/api/v1', require('./routes/auth'));
+app.use('/api/v1' ,require('./routes/auth'));
 app.use('/api/v1/users', require('./routes/users'));
 app.use('/api/v1/artists', require('./routes/artists'));
 app.use('/api/v1/albums', require('./routes/albums'));

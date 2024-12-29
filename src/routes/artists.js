@@ -5,11 +5,13 @@ const validateObjectId = require('../middlewares/validate'); // Validate ObjectI
 const { getArtists, getArtistById, addArtist, updateArtist, deleteArtist } = require('../controllers/artist');
 const validateAuthorization = require('../middlewares/validateAuthorization');
 
+router.use(authenticate);
+
 // Artist Routes
-router.get('/', authenticate, validateAuthorization, getArtists);
-router.get('/:id', authenticate, validateAuthorization, validateObjectId, getArtistById);
+router.get('/', validateAuthorization, getArtists);
+router.get('/:id', validateAuthorization, validateObjectId, getArtistById);
 router.post('/add-artist',validateAuthorization, authenticate, addArtist);
-router.put('/:id', authenticate,validateAuthorization, validateObjectId, updateArtist);
-router.delete('/:id', authenticate,validateAuthorization, validateObjectId, deleteArtist);
+router.put('/:id', validateAuthorization, validateObjectId, updateArtist);
+router.delete('/:id', validateAuthorization, validateObjectId, deleteArtist);
 
 module.exports = router;

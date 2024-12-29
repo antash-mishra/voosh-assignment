@@ -5,11 +5,13 @@ const { getTracks, getTrackById, addTrack, updateTrack, deleteTrack } = require(
 const validateAuthorization = require('../middlewares/validateAuthorization');
 const router = express.Router();
 
+router.use(authenticate);
+
 // Track Routes
-router.get('/', authenticate, validateAuthorization, getTracks);
-router.get('/:id', authenticate, validateAuthorization, validateObjectId ,getTrackById);
-router.post('/add-track', authenticate, validateAuthorization, addTrack);
-router.put('/:id', authenticate, validateAuthorization, validateObjectId, updateTrack);
-router.delete('/:id', authenticate, validateAuthorization, validateObjectId, deleteTrack);
+router.get('/', validateAuthorization, getTracks);
+router.get('/:id', validateAuthorization, validateObjectId ,getTrackById);
+router.post('/add-track', validateAuthorization, addTrack);
+router.put('/:id', validateAuthorization, validateObjectId, updateTrack);
+router.delete('/:id', validateAuthorization, validateObjectId, deleteTrack);
 
 module.exports = router;
