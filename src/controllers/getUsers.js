@@ -16,7 +16,8 @@ const getUsers = async (req, res) => {
 
     try {
         // Ensure only Admin can access this endpoint
-        if (req.user.role !== 'Admin') {
+        console.log("User:",req.user);
+        if (req.user?.role !== 'Admin') {
             return res.status(401).json({
                 status: 401,
                 data: null,

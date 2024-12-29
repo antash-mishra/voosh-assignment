@@ -5,7 +5,7 @@ const updateArtist = async (req, res) => {
     const { name, grammy, hidden } = req.body;
 
     // Validate input
-    if (!name && grammy === undefined && hidden === undefined) {
+    if (!name && !grammy && !['true', 'false'].includes(hidden)) {
         return res.status(400).json({
             status: 400,
             data: null,

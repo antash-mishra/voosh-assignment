@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     favorite_id: {type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true},
     user_id: {type: DataTypes.UUID, allowNull: false, references: {model: 'Users', key: 'user_id'}},
     category: {type: DataTypes.ENUM('artist', 'album', 'track'), allowNull: false},
-    item_id: {type: DataTypes.UUID, allowNull: false}
+    item_id: {type: DataTypes.UUID, allowNull: false},
+    createdAt: {type: DataTypes.DATE, defaultValue: DataTypes.NOW},
+    updatedAt: {type: DataTypes.DATE, defaultValue: DataTypes.NOW}
   }, {
     sequelize,
     modelName: 'Favorite',

@@ -18,8 +18,10 @@ module.exports = (sequelize, DataTypes) => {
   Artist.init({
     artist_id: {type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true},
     name: {type: DataTypes.STRING, allowNull: false},
-    grammy: {type: DataTypes.BOOLEAN, allowNull: false},
-    hidden: {type: DataTypes.BOOLEAN, allowNull: false}
+    grammy: {type: DataTypes.INTEGER, defaultValue: 0},
+    hidden: {type: DataTypes.BOOLEAN, allowNull: false},
+    createdAt: {type: DataTypes.DATE, defaultValue: DataTypes.NOW},
+    updatedAt: {type: DataTypes.DATE, defaultValue: DataTypes.NOW}
   }, {
     sequelize,
     modelName: 'Artist',

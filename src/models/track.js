@@ -21,7 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     duration: {type: DataTypes.INTEGER, allowNull: false},
     hidden: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
     album_id: {type: DataTypes.UUID, allowNull: false, references: {model: 'Albums', key: 'album_id'}},
-    artist_id: {type: DataTypes.UUID, allowNull: false, references: {model: 'Artists', key: 'artist_id'}}
+    artist_id: {type: DataTypes.UUID, allowNull: false, references: {model: 'Artists', key: 'artist_id'}},
+    createdAt: {type: DataTypes.DATE, defaultValue: DataTypes.NOW},
+    updatedAt: {type: DataTypes.DATE, defaultValue: DataTypes.NOW}
   }, {
     sequelize,
     modelName: 'Track',

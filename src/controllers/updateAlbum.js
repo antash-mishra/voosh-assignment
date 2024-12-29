@@ -1,11 +1,10 @@
-const { Artist } = require('../models');
-const {v4: uuidv4} = require('uuid');
+const {Album} = require('../models');
 
-const addArtist = async (req, res) => {
-    const { name, grammy, hidden = false } = req.body;
+const updateAlbum = async (req, res) => {
+    const {id} = req.params;
+    const {name, year, hidden} = req.body;
 
-    // Validate input
-    if (!name) {
+    if (!name || year === undefined || hidden === undefined) {
         return res.status(400).json({
             status: 400,
             data: null,
@@ -25,33 +24,28 @@ const addArtist = async (req, res) => {
                 error: null
             });
         }
-        
-        // Checkinf if Artist already exists
-        const existingArtist = await Artist.findOne({ where: { name } });
-        if (existingArtist) {
-            return res.status(400).json({
-                status: 400,
+
+        // Fetch album by id
+        const album = await Album.findByPk(id);
+        if (!album) {
+            return res.status(404).json({
+                status: 404,
                 data: null,
-                message: "Bad Request, Reason: Artist already exists.",
+                message: "Resource doesn't exist.",
                 error: null
             });
         }
 
-        // Creating new artist
-        const newArtist = await Artist.create({ 
-            artist_id: uuidv4(),
-            name,
-            grammy,
-            hidden
-        });
+        // Update the album
+        if (name !== undefined) album.name = name;
+        if (year !== undefined) album.year = year;
+        if (hidden !== undefined) album.hidden = hidden;
 
-        return res.status(201).json({
-            status: 201,
-            data: newArtist,
-            message: "Artist added successfully.",
-            error: null
-        });
-    } catch (error) {
+        await album.save();
+
+        return res.status(204).send();
+    }
+    catch (error) {
         console.error(error);
         return res.status(500).json({
             status: 500,
@@ -62,4 +56,4 @@ const addArtist = async (req, res) => {
     }
 }
 
-module.exports = addArtist;
+module.exports = updateAlbum

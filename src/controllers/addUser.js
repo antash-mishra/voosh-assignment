@@ -1,10 +1,10 @@
-const User = require('../models');
+const {User} = require('../models');
 const bcrypt = require('bcrypt');
 const {v4: uuidv4} = require('uuid');
 
 const addUser = async (req, res) => {
-    const {email, paasword, role} = req.body;
-    
+    const {email, password, role} = req.body;
+    console.log("Request Body:", req.body);
     // Validation Input
     if(!email || !password || !role) {
         return res.status(400).json({
@@ -55,7 +55,7 @@ const addUser = async (req, res) => {
             user_id: uuidv4(),
             email,
             password: hashedPassword,
-            role,
+            role
         });
     
         return res.status(201).json({
@@ -76,4 +76,4 @@ const addUser = async (req, res) => {
 
 }
 
-module.exports = addUser
+module.exports = addUser;

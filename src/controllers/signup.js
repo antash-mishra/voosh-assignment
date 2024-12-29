@@ -32,7 +32,7 @@ const signup = async (req, res) => {
 
         // Check if this is the first user (it will be admin)
         const isFirstUser = await User.count() === 0;
-        const role = isFirstUser ? 'admin' : 'user';
+        const role = isFirstUser ? 'Admin' : 'Viewer';
 
         const user = await User.create({ 
             user_id: uuidv4(),

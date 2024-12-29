@@ -32,15 +32,15 @@ const getArtists = async (req, res) => {
             error: null,
           });
         }
-
-        if (canViewHidden) {
-            hidden = 'false'
-        }
+        
+        // Check user role for visibility
+        const userRole = req.user?.role; // Assume `req.user` is populated by auth middleware
+        const canViewHidden = userRole === 'Admin' || userRole === 'Editor';
         
         // Build filters
         const filters = {};
         if (grammy) filters.grammy = grammy;
-        if (hidden) filters.hidden = hidden.toLowerCase() === 'true';
+        if (hidden ) filters.hidden = hidden.toLowerCase() === 'true';
 
         // Fetch artists with filters and pagination
         const artists = await Artist.findAll({

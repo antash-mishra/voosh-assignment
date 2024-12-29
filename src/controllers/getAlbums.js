@@ -71,5 +71,15 @@ const getAlbums = async (req, res) => {
 
 
 
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            status: 500,
+            data: null,
+            message: "Internal Server Error.",
+            error: error.message,
+        });
     }
 }
+
+module.exports = getAlbums;

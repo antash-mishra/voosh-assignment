@@ -40,7 +40,7 @@ const updateUserPassowrd = async (req, res) => {
         const hashedPassword = await bcrypt.hash(new_password, 10);
         await user.update({password: hashedPassword});
         
-        return res.status(204).send(); 
+        return res.status(204).send()
     } catch (error) {
         console.log(error);
 
