@@ -2,6 +2,7 @@
 
 ## Submission
 > - **Base URL**: `https://voosh-assignment.fly.dev/api/v1`
+> - **Note**: Update routes has response type empty(as per requested) so it won't provide JSON Response. 
 
 ## Overview
 
