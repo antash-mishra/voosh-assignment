@@ -1,8 +1,11 @@
 # Enhanced Music Library Management API
 
-## Submission
-> - **Base URL**: `https://voosh-assignment.fly.dev/api/v1`
-> - **Note**: Update routes has response type empty(as per requested) so it won't provide JSON Response. 
+## Submission Guidelines
+
+- **Base URL**: `https://voosh-assignment.fly.dev/api/v1`
+- **Important Notes**:  
+  - The **Update Routes** return an empty response as requested; hence, they do not provide a JSON response.  
+  - While the response structure is consistent across all routes, the values for each response key may differ from those provided in the documentation.
 
 ## Overview
 
