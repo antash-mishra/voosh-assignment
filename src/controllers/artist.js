@@ -1,6 +1,7 @@
 const { Artist } = require('../models');
 const {v4: uuidv4} = require('uuid');
 
+// POST /artists/add-artist Controller - Add new Artist
 const addArtist = async (req, res) => {
     const { name, grammy, hidden = false } = req.body;
 
@@ -62,6 +63,7 @@ const addArtist = async (req, res) => {
     }
 }
 
+// DELETE /artists/:id Controller - Delete Artist
 const deleteArtist = async (req, res) => {
     const { id } = req.params;
 
@@ -107,7 +109,7 @@ const deleteArtist = async (req, res) => {
     }
 };
 
-// GET /artists Controller
+// GET /artists Controller - Get Artists by Filters
 const getArtists = async (req, res) => {
     const { limit = 5, offset = 0, grammy, hidden } = req.query;
 
@@ -173,7 +175,7 @@ const getArtists = async (req, res) => {
     }
 };
 
-// GET /artistById Controller
+// GET /artists/:id Controller - Get Artist by ID
 const getArtistById = async (req, res) => {
     const {id} = req.params;
 
@@ -220,6 +222,7 @@ const getArtistById = async (req, res) => {
     }
 };
 
+// PUT /artists/:id Controller - Update Artist by ID
 const updateArtist = async (req, res) => {
     const { id } = req.params;
     const { name, grammy, hidden } = req.body;

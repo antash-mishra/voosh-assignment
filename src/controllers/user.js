@@ -59,6 +59,7 @@ const getUsers = async (req, res) => {
 
 };
 
+// POST /users/add-user Controller
 const addUser = async (req, res) => {
     const {email, password, role} = req.body;
     console.log("Request Body:", req.body);
@@ -191,6 +192,7 @@ const deleteUser = async (req, res) => {
     }
 };
 
+// PUT /users/update-password Controller
 const updateUserPassowrd = async (req, res) => {
     const { old_password, new_password} = req.body;
 

@@ -1,5 +1,6 @@
 const {Favorite, Artist, Album, Track} = require('../models');
 
+// POST /favorites/add-favorite Controller - Add new Favorite
 const addFavorite = async (req, res) => {
     const {category, item_id} = req.body;
 
@@ -163,6 +164,7 @@ const getFavorites = async (req, res) => {
     }
 };
 
+// DELETE /favorites/:id Controller - Delete Favorite by Item ID
 const deleteFavorite = async (req, res) => {
     const item_id = req.params.id;
 

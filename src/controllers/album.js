@@ -1,5 +1,6 @@
 const { Album } = require('../models');
 
+// POST /albums/add-album Controller
 const addAlbum = async (req, res) => {
     const {name, year, artist_id, hidden = false} = req.body;
 
@@ -74,6 +75,7 @@ const addAlbum = async (req, res) => {
     }
 }
 
+// DELETE /album/:id Controller - Deletes an album by ID
 const deleteAlbum = async (req, res) => {
     const { id } = req.params;
 
@@ -119,6 +121,7 @@ const deleteAlbum = async (req, res) => {
     }
 }
 
+// GET /albums Controller - Fetches albums with pagination
 const getAlbums = async (req, res) => {
     const { limit = 5, offset=0, artist_id, hidden} = req.query;
 
@@ -201,7 +204,7 @@ const getAlbums = async (req, res) => {
     }
 };
 
-// GET /albumById Controller
+// GET /albums/:id Controller - Fetches an album by ID
 const getAlbumById = async (req, res) => {
     const {id} = req.params;
 
@@ -248,6 +251,7 @@ const getAlbumById = async (req, res) => {
     }
 };
 
+// PUT /albums/:id Controller - Updates an album by ID
 const updateAlbum = async (req, res) => {
     const {id} = req.params;
     const {name, year, hidden} = req.body;
