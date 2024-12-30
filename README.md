@@ -1,6 +1,6 @@
 # Enhanced Music Library Management API
 
-## Submission Guidelines
+## Submission
 
 - **Base URL**: `https://voosh-assignment.fly.dev/api/v1`
 - **Important Notes**:  
